@@ -1,4 +1,4 @@
-package com.ltfullstack.commonservice.queries;
+package com.ltfullstack.bookservice.query.queries;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
