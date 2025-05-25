@@ -2,6 +2,7 @@ package com.ltfullstack.employeeservice.command.event;
 
 import com.ltfullstack.employeeservice.command.data.Employee;
 import com.ltfullstack.employeeservice.command.data.EmployeeRepository;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,12 +25,12 @@ public class EmployeeEventHandler {
 
     @ExceptionHandler
     public void on(EmployeeUpdatedEvent event) {
-       Optional<Employee> oldEmployee = employeeRepository.findById(event.getId());
-       oldEmployee.ifPresent(employee -> {
-           employee.setFirstName(event.getFirstName());
-           employee.setLastName(event.getLastName());
-           employee.setKin(event.getKin());
-
-       })
+       Optional< Employee> oldEmployee = employeeRepository.findById(event.getId());
+       Employee employee = oldEmployee.orElseThrow(() -> new NotFoundException("Employee not found"));
+       employee.setFirstName(event.getFirstName());
+       employee.setLastName(event.getLastName());
+       employee.setKin(event.getKin());
+       employee.setIsDisciplined(event.getIsDisciplined());
+       employeeRepository.save(employee);
     }
 }
