@@ -17,6 +17,7 @@ public class ExceptionAdvice {
         log.error("Unknown internal server error: "+ex.getMessage());
         log.error("Exception class: "+ex.getClass());
         log.error("Exception cause: "+ex.getCause());
-        return new ResponseEntity<>(new ErrorMessage("9999", "Unknown internal server error", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+        //return new ResponseEntity<>(new ErrorMessage("9999", "Unknown internal server error", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ErrorMessage("9999", ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
