@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan({"com.ltfullstack.commonservice","com.ltfullstack.bookservice"})
+@ComponentScan({"com.ltfullstack.bookservice","com.ltfullstack.commonservice"})
 public class BookserviceApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BookserviceApplication.class, args);
 	}

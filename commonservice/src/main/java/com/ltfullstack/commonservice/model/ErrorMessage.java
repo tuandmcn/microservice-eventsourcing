@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ErrorMessage {
     private String code;
     private String message;
