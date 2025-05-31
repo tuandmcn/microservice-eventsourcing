@@ -19,9 +19,9 @@ public class EmployeeQueryController {
     private QueryGateway queryGateway;
 
     @GetMapping
-    public List<EmployeeResponseModel> getAllEmployees(@RequestParam(required = false, defaultValue = "false") Boolean isDiscipline) {
+    public List<EmployeeResponseModel> getAllEmployees(@RequestParam(required = false, defaultValue = "false") Boolean isDisciplined) {
         return queryGateway
-                .query(new GetAllEmployeeQuery(isDiscipline), ResponseTypes.multipleInstancesOf(EmployeeResponseModel.class)).join();
+                .query(new GetAllEmployeeQuery(isDisciplined), ResponseTypes.multipleInstancesOf(EmployeeResponseModel.class)).join();
     }
 
     @GetMapping("/{employeeId}")
