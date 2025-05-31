@@ -4,6 +4,10 @@ import com.ltfullstack.employeeservice.command.data.Employee;
 import com.ltfullstack.employeeservice.query.model.EmployeeResponseModel;
 import com.ltfullstack.employeeservice.query.queries.GetAllEmployeeQuery;
 import com.ltfullstack.employeeservice.query.queries.GetDetailEmployeeQuery;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.axonframework.messaging.responsetypes.ResponseType;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -13,10 +17,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/employee")
+@RequestMapping("/api/v1/employees")
+@Tag(name="Employee Query")
+@Hidden
 public class EmployeeQueryController {
     @Autowired
     private QueryGateway queryGateway;
+
+    @Operation(
+            summary = "Get list employee",
+            description = "Get endpoint for employee with filter",
+            responses = {
+                    @ApiResponse(
+                            description = "Seccess",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized / Invalid Token"
+                    )
+            }
+    )
 
     @GetMapping
     public List<EmployeeResponseModel> getAllEmployees(@RequestParam(required = false, defaultValue = "false") Boolean isDisciplined) {
