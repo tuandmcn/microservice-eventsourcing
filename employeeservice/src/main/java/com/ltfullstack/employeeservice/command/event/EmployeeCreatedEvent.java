@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class EmployeeCreatedEvent {
     private String id;
     private String firstName;
-    private String lastName;
+    private String LastName;
     private String Kin;
     private Boolean isDisciplined;
 }

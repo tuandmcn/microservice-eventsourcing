@@ -20,51 +20,51 @@ public class EmployeeAggregate {
     @AggregateIdentifier
     private String id;
     private String firstName;
-    private String lastName;
+    private String LastName;
     private String Kin;
     private Boolean isDisciplined;
 
     @CommandHandler
-    public EmployeeAggregate(CreateEmployeeCommand command) {
+    public EmployeeAggregate(CreateEmployeeCommand command){
         EmployeeCreatedEvent event = new EmployeeCreatedEvent();
-        BeanUtils.copyProperties(command, event);
+        BeanUtils.copyProperties(command,event);
         AggregateLifecycle.apply(event);
     }
 
     @CommandHandler
-    public void handle(UpdateEmployeeCommand command) {
+    public void handle(UpdateEmployeeCommand command){
         EmployeeUpdatedEvent event = new EmployeeUpdatedEvent();
-        BeanUtils.copyProperties(command, event);
+        BeanUtils.copyProperties(command,event);
         AggregateLifecycle.apply(event);
     }
 
     @CommandHandler
-    public void handle(DeleteEmployeeCommand command) {
+    public void handle(DeleteEmployeeCommand command){
         EmployeeDeletedEvent event = new EmployeeDeletedEvent();
-        BeanUtils.copyProperties(command, event);
+        BeanUtils.copyProperties(command,event);
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(EmployeeCreatedEvent event) {
+    public void on(EmployeeCreatedEvent event){
         this.id = event.getId();
         this.firstName = event.getFirstName();
-        this.lastName = event.getLastName();
+        this.LastName = event.getLastName();
         this.Kin = event.getKin();
+        this.isDisciplined = event.getIsDisciplined();
     }
 
     @EventSourcingHandler
-    public void on(EmployeeUpdatedEvent event) {
+    public void on(EmployeeUpdatedEvent event){
         this.id = event.getId();
         this.firstName = event.getFirstName();
-        this.lastName = event.getLastName();
+        this.LastName = event.getLastName();
         this.Kin = event.getKin();
+        this.isDisciplined = event.getIsDisciplined();
     }
 
     @EventSourcingHandler
-    public void on(EmployeeDeletedEvent event) {
+    public void on(EmployeeDeletedEvent event){
         this.id = event.getId();
     }
-
-
 }

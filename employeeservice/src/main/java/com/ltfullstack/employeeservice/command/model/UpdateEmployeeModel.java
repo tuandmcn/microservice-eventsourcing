@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateEmployeeModel {
-    @NotBlank(message = "Firstname is mandatory")
+    @NotBlank(message = "First name is mandatory")
     private String firstName;
-    @NotBlank(message = "Lastname is mandatory")
-    private String lastName;
+    @NotBlank(message = "Last name is mandatory")
+    private String LastName;
     @NotBlank(message = "Kin is mandatory")
     private String Kin;
+
     @NotNull(message = "isDisciplined is mandatory")
     private Boolean isDisciplined;
 }
