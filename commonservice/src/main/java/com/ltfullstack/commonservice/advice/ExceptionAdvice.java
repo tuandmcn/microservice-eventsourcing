@@ -1,4 +1,5 @@
 package com.ltfullstack.commonservice.advice;
+
 import com.ltfullstack.commonservice.model.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
