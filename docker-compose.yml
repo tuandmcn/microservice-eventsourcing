@@ -9,6 +9,31 @@ services:
             - "8761:8761"
         networks:
             - microservices-network
+    bookservice:
+        build:
+            context: .
+            dockerfile: bookservice/Dockerfile
+        ports:
+            -   "9001:9001"
+        networks:
+            - microservices-network
+        depends_on:
+            - discoverserver
+            - axonserver
+        environment:
+            - "AXONIQ_AXONSERVER_SERVER=axonserver:8024"
+    axonserver:
+        image: axoniq/axonserver:latest
+        hostname: axonserver
+        container_name: axonserver
+        environment:
+            - "AXONIQ_AXONSERVER_STANDALONE=TRUE"
+        ports:
+            - "8024:8024"
+            - "8124:8124"
+            - "8224:8224"
+        networks:
+            - microservices-network
 
 networks:
     microservices-network:
