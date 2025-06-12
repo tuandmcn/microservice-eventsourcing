@@ -1,13 +1,13 @@
-#Stage 1: Use Maven for building
-FROM maven:3.8.5-openjdk-17-slim as build
+# Use Maven for building
+FROM maven:3.8.5-openjdk-17-slim AS build
 WORKDIR /app
-COPY . ./discoverserver
+COPY ./discoverserver ./discoverserver  
 WORKDIR /app/discoverserver
-RUN mvn clean package -Dskiptests
+RUN mvn clean package -DskipTests
 
-#Stage 2: use OpenJDK for running
+# Use OpenJDK for running
 FROM openjdk:21-jdk-slim
 WORKDIR /app
-COPY --from=build /app/discoverserver/target/*.jar discoverserver.jar
+COPY --from=build /app/discoverserver/target/*.jar discoverserver.jar  
 EXPOSE 8761
-ENTRYPOINT ["java","-jar","discoverserver.jar"]
+ENTRYPOINT ["java", "-jar", "discoverserver.jar"]
